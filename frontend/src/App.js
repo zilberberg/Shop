@@ -6,7 +6,7 @@ import ProductScreen from './screens/ProductScreen';
 import CartScreen from './screens/CartScreen';
 import { listProducts } from './actions/productActions';
 import { useDispatch, useSelector } from 'react-redux';
-import { addCategories, selectCategory } from './actions/utilsActions';
+import { addCategories, selectCategory, resetCategory } from './actions/utilsActions';
 
 function App(props) {
   const productList = useSelector(state => state.productList);
@@ -42,6 +42,10 @@ function App(props) {
     dispatch(selectCategory(category));
   }
 
+  const resetCategoryHandler = () => {
+    dispatch(resetCategory());
+  }
+
   return (
     <BrowserRouter>
       <div className="grid-container">
@@ -73,6 +77,7 @@ function App(props) {
                     })
                   }
                 </ul>
+                <button className="button primary" onClick={resetCategoryHandler}>Reset Category</button>
           </aside>
 
           <main className="main">

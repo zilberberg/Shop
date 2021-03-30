@@ -1,2 +1,3 @@
 export const CATEGORIES_SET = "CATEGORIES_SET";
 export const CATEGORY_SET = "CATEGORY_SET";
+export const RESET_CATEGORY = "RESET_CATEGORY";

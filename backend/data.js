@@ -36,7 +36,7 @@ export default {
     {
         _id: '4',
         name: 'Slim Pants',
-        category: 'Shirts',
+        category: 'Pants',
         image: '/images/p4.jpg',
         price: 120,
         brand: 'Nike',
