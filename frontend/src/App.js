@@ -2,6 +2,8 @@ import logo from './logo.svg';
 import './App.css';
 import { BrowserRouter, Route, Link } from 'react-router-dom';
 import HomeScreen from './screens/HomeScreen';
+import ProductScreen from './screens/ProductScreen';
+import CartScreen from './screens/CartScreen';
 
 function App() {
 
@@ -24,7 +26,7 @@ function App() {
               <Link to="/" >Shop</Link>
             </div>
             <div className="header-links">
-                <a href="/cart">Cart</a>
+                <Link to="/cart" >Cart</Link>
             </div>
           </header>
 
@@ -44,7 +46,9 @@ function App() {
           <main className="main">
               <div className="content">
                 <Route path="/" exact={true} component={HomeScreen}/>
-                  
+                <Route path="/product/:id" component={ProductScreen}/>
+                <Route path="/cart" component={CartScreen}/>
+
               </div>              
           </main>
 
