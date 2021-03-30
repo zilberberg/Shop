@@ -18,8 +18,8 @@ function ProductScreen (props) {
     }, []);
 
     const handleAddToCart = (productId) => {
-        props.history.push("/cart");
         dispatch(addToCart(productId, Number(qty)))
+        props.history.push("/cart");        
     }
 
     return (

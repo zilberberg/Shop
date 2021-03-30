@@ -4,9 +4,9 @@ import thunk from 'redux-thunk';
 import { cartReducer } from './reducers/cartReducer';
 import Cookie from 'js-cookie';
 
-const cartItems = Cookie.getJSON("cartItems");
+const cartItems = Cookie.getJSON("cartItems") || [];
 
-const initialState = { cart: cartItems };
+const initialState = { cart: {cartItems} };
 const reducer = combineReducers({
     productList: productListReducer,
     productDetails: productDetailsReducer,
