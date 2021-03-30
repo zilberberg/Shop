@@ -9,9 +9,13 @@ function HomeScreen (props) {
     const [selectedProducts, setSelectedProducts] = useState([]);
     const [searchVal, setSearchVal] = useState();
 
+    const utils = useSelector(state => state.utils);
+    const {category} = utils;
+
+
     const dispatch = useDispatch();
     useEffect(() => {
-        dispatch(listProducts());
+        dispatch(listProducts());        
         return () => {
             //
         };
@@ -37,24 +41,28 @@ function HomeScreen (props) {
             
             {
             (searchVal ? selectedProducts : products).map((product, index) => {
-                return (
-                <li key={index}>
-                    <div className="product">
-                        <Link to={'/product/' + product._id}>
-                            <img className="product-image" src={product.image} alt="product"/>
-                        </Link>
-                        <div className="product-name">
-                            <Link to={'/product/' + product._id}>
-                                {product.name}
-                            </Link>
-
-                        </div>
-                        <div className="product-brand">{product.brand}</div>
-                        <div className="product-price">${product.price}</div>
-                        <div className="product-rating">{product.ratings} Stars({product.numReviews} Reviews)</div>
-                    </div>
-                </li>
-                )
+                if (category && product.category !== category) {
+                    return
+                } else {
+                    return (
+                        <li key={index}>
+                            <div className="product">
+                                <Link to={'/product/' + product._id}>
+                                    <img className="product-image" src={product.image} alt="product"/>
+                                </Link>
+                                <div className="product-name">
+                                    <Link to={'/product/' + product._id}>
+                                        {product.name}
+                                    </Link>
+    
+                                </div>
+                                <div className="product-brand">{product.brand}</div>
+                                <div className="product-price">${product.price}</div>
+                                <div className="product-rating">{product.ratings} Stars({product.numReviews} Reviews)</div>
+                            </div>
+                        </li>
+                        )
+                }
             })
             }
         </ul>
