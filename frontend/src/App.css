@@ -33,7 +33,22 @@ button {
   align-items: center;
   background-color: #203040;
   color: #fff;
-  padding: 0.5rem;
+  padding: 1rem;
+}
+.searchHeader {
+  grid-area: header;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #203040;
+  color: #fff;
+  padding: 1rem;
+}
+.searchBox {
+  border-radius: .5rem;
+  height: 3rem;
+  font-size: 2rem;
+  padding-left: .5rem;
 }
 .brand a{
   color: #fff;
