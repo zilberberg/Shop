@@ -7,8 +7,13 @@ import CartScreen from './screens/CartScreen';
 import { listProducts } from './actions/productActions';
 import { useDispatch, useSelector } from 'react-redux';
 import { addCategories, selectCategory, resetCategory } from './actions/utilsActions';
+import SigninScreen from './screens/SigninScreen';
+import UserScreen from './screens/UserScreen';
 
 function App(props) {
+  const userSignin = useSelector(state => state.userSignin);
+  const {userInfo} = userSignin;
+
   const productList = useSelector(state => state.productList);
   const {products, loading, error } = productList;
 
@@ -54,10 +59,14 @@ function App(props) {
               <button onClick={openMenu}>
                   &#9776;
               </button>
-              <Link to="/" >Shop</Link>
+              <Link to="/" >ECommerce Shop</Link>
             </div>
             <div className="header-links">
                 <Link to="/cart" >Cart</Link>
+                {
+                  userInfo ? <Link to="/profile">{userInfo.name}</Link> :
+                  <Link to="/signin">Sign in</Link>
+                }
             </div>
           </header>
 
@@ -82,6 +91,8 @@ function App(props) {
 
           <main className="main">
               <div className="content">
+                <Route path="/profile" component={UserScreen}/>
+                <Route path="/signin" component={SigninScreen}/>
                 <Route path="/" exact={true} component={HomeScreen}/>
                 <Route path="/product/:id" component={ProductScreen}/>
                 <Route path="/cart" component={CartScreen}/>
