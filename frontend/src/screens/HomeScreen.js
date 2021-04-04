@@ -6,11 +6,9 @@ import { listProducts } from '../actions/productActions';
 function HomeScreen (props) {
     const productList = useSelector(state => state.productList);
     const {products, loading, error } = productList;
-    const [selectedProducts, setSelectedProducts] = useState([]);
-    const [searchVal, setSearchVal] = useState();
-
+    
     const utils = useSelector(state => state.utils);
-    const {category} = utils;
+    const {searchVal, category} = utils;
 
 
     const dispatch = useDispatch();
@@ -21,26 +19,25 @@ function HomeScreen (props) {
         };
     }, [])
 
-    const searchProducts = (val) => {
-        setSearchVal(val);
-        const currentProducts = products.filter((product) => {
-            return product.name.toString().toLowerCase().includes(val.toLowerCase()) 
-        });
-        setSelectedProducts(currentProducts);
+    const getSelectedProducts = () => {
+        if (searchVal) {
+            const currentProducts = products.filter((product) => {
+                return product.name.toString().toLowerCase().includes(searchVal.toLowerCase()) 
+            });
+            return currentProducts;
+        } else {
+            return products;
+        }
     }
 
     return (
         loading ? <div>Loading...</div> :
         error ? <div>{error}</div> :
         <>
-        <header className="searchHeader">
-            <input className="searchBox" type="text" placeholder="Search a Product" onChange={(e) => searchProducts(e.target.value)}>
-            </input>
-        </header>
         <ul className="products">
             
             {
-            (searchVal ? selectedProducts : products).map((product, index) => {
+            (getSelectedProducts()).map((product, index) => {
                 if (category && product.category !== category) {
                     return
                 } else {

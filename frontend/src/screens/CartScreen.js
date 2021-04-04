@@ -2,13 +2,14 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import {addToCart, removeFromCart} from '../actions/cartActions';
+import { addCategories } from '../actions/utilsActions';
 
 function CartScreen(props) {
     const cart = useSelector(state => state.cart);
     const { cartItems } = cart;
     const dispatch = useDispatch();
     const removeFromCartHandler = (productId) => {
-        dispatch(removeFromCart(productId))
+        dispatch(removeFromCart(productId));
     }
     useEffect(() => {
 
